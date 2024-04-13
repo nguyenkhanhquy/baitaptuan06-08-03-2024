@@ -89,8 +89,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = editText1.getText().toString();
-                arrayList.add(name);
-                adapter.notifyDataSetChanged();
+                if (!name.isEmpty()) {
+                    arrayList.add(name);
+                    adapter.notifyDataSetChanged();
+
+                    editText1.setText("");
+                }
             }
         });
 
@@ -108,8 +112,13 @@ public class MainActivity extends AppCompatActivity {
         btnCapnhat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              arrayList.set(vitri, editText1.getText().toString());
-              adapter.notifyDataSetChanged();
+                if (vitri != -1) {
+                    arrayList.set(vitri, editText1.getText().toString());
+                    adapter.notifyDataSetChanged();
+
+                    vitri = -1;
+                    editText1.setText("");
+                }
             }
         });
 
@@ -119,8 +128,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (vitri != -1) {
                     arrayList.remove(vitri);
-                    vitri = -1;
                     adapter.notifyDataSetChanged();
+
+                    vitri = -1;
+                    editText1.setText("");
                 }
             }
         });
